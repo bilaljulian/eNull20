@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eNull Listing Management and Shopping Cart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+        }
+        .section {
+            padding: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+        h2 {
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"], input[type="file"], select, textarea {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .image-preview {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- Listing Management -->
+        <div class="section" id="listing-management">
+            <h2>Listing Management</h2>
+
+            <!-- Add New Listing -->
+            <div class="form-group">
+                <h3>Add New Listing</h3>
+                <label for="listing-title">Title:</label>
+                <input type="text" id="listing-title" name="listing-title" placeholder="Enter listing title">
+
+                <label for="listing-description">Description:</label>
+                <textarea id="listing-description" name="listing-description" placeholder="Enter item description"></textarea>
+
+                <label for="listing-price">Price:</label>
+                <input type="text" id="listing-price" name="listing-price" placeholder="Enter item price">
+
+                <label for="listing-category">Category:</label>
+                <select id="listing-category" name="listing-category">
+                    <option value="">Select Category</option>
+                    <option value="category1">Category 1</option>
+                    <option value="category2">Category 2</option>
+                    <!-- Add more categories as needed -->
+                </select>
+
+                <label for="listing-tags">Tags:</label>
+                <input type="text" id="listing-tags" name="listing-tags" placeholder="Enter item tags">
+
+                <label for="listing-images">Upload Images:</label>
+                <input type="file" id="listing-images" name="listing-images" multiple>
+                <div id="image-preview-container"></div>
+
+                <label for="listing-shipping">Shipping Options:</label>
+                <input type="text" id="listing-shipping" name="listing-shipping" placeholder="Enter shipping options">
+
+                <label for="listing-return-policy">Return Policy:</label>
+                <textarea id="listing-return-policy" name="listing-return-policy" placeholder="Enter return policy"></textarea>
+
+                <button class="btn" type="submit">Add Listing</button>
+            </div>
+
+            <!-- Edit Listing -->
+            <div class="form-group">
+                <h3>Edit Listing</h3>
+                <label for="edit-listing-id">Select Listing to Edit:</label>
+                <select id="edit-listing-id" name="edit-listing-id">
+                    <option value="">Select Listing</option>
+                    <!-- Add dynamic options here -->
+                </select>
+
+                <!-- Dynamic fields to be populated based on selected listing -->
+                <div id="edit-listing-fields">
+                    <!-- Fields similar to Add New Listing -->
+                </div>
+
+                <button class="btn" type="submit">Update Listing</button>
+            </div>
+
+            <!-- Delete Listing -->
+            <div class="form-group">
+                <h3>Delete Listing</h3>
+                <label for="delete-listing-id">Select Listing to Delete:</label>
+                <select id="delete-listing-id" name="delete-listing-id">
+                    <option value="">Select Listing</option>
+                    <!-- Add dynamic options here -->
+                </select>
+
+                <button class="btn" type="submit">Delete Listing</button>
+            </div>
+
+            <!-- Listing Expiration Management -->
+            <div class="form-group">
+                <h3>Listing Expiration Management</h3>
+                <label for="listing-expiration-id">Select Listing:</label>
+                <select id="listing-expiration-id" name="listing-expiration-id">
+                    <option value="">Select Listing</option>
+                    <!-- Add dynamic options here -->
+                </select>
+
+                <label for="listing-expiration-date">Set Expiration Date:</label>
+                <input type="date" id="listing-expiration-date" name="listing-expiration-date">
+
+                <button class="btn" type="submit">Update Expiration</button>
+            </div>
+
+            <!-- Listing Visibility Options -->
+            <div class="form-group">
+                <h3>Listing Visibility Options</h3>
+                <label for="listing-visibility-id">Select Listing:</label>
+                <select id="listing-visibility-id" name="listing-visibility-id">
+                    <option value="">Select Listing</option>
+                    <!-- Add dynamic options here -->
+                </select>
+
+                <label for="listing-visibility">Visibility:</label>
+                <select id="listing-visibility" name="listing-visibility">
+                    <option value="visible">Visible</option>
+                    <option value="hidden">Hidden</option>
+                </select>
+
+                <button class="btn" type="submit">Update Visibility</button>
+            </div>
+
+            <!-- Highlight Listings -->
+            <div class="form-group">
+                <h3>Highlight Listings</h3>
+                <label for="highlight-listing-id">Select Listing:</label>
+                <select id="highlight-listing-id" name="highlight-listing-id">
+                    <option value="">Select Listing</option>
+                    <!-- Add dynamic options here -->
+                </select>
+
+                <label for="highlight-color">Highlight Color:</label>
+                <input type="color" id="highlight-color" name="highlight-color" value="#ff0000">
+
+                <button class="btn" type="submit">Highlight Listing</button>
+            </div>
+
+            <!-- Featured Listings Management -->
+            <div class="form-group">
+                <h3>Featured Listings Management</h3>
+                <label for="featured-listing-id">Select Listing:</label>
+                <select id="featured-listing-id" name="featured-listing-id">
+                    <option value="">Select Listing</option>
+                    <!-- Add dynamic options here -->
+                </select>
+
+                <label for="featured-status">Featured Status:</label>
+                <select id="featured-status" name="featured-status">
+                    <option value="featured">Featured</option>
+                    <option value="not-featured">Not Featured</option>
+                </select>
+
+                <button class="btn" type="submit">Update Featured Status</button>
+            </div>
+
+            <!-- Listing Fees -->
+            <div class="form-group">
+                <h3>Listing Fees</h3>
+                <label for="listing-fee-id">Select Listing:</label>
+                <select id="listing-fee-id" name="listing-fee-id">
+                    <option value="">Select Listing</option>
+                    <!-- Add dynamic options here -->
+                </select>
+
+                <label for="listing-fee">Fee Amount:</label>
+                <input type="text" id="listing-fee" name="listing-fee" placeholder="Enter listing fee amount">
+
+                <button class="btn" type="submit">Update Listing Fee</button>
+            </div>
+
+            <!-- Upload Multiple Images -->
+            <div class="form-group">
+                <h3>Upload Multiple Images</h3>
+                <label for="upload-images">Upload Images:</label>
+                <input type="file" id="upload-images" name="upload-images" multiple>
+                <div id="upload-image-preview-container"></div>
+            </div>
+
+            <!-- Image Editing Tools -->
+            <div class="form-group">
+                <h3>Image Editing Tools</h3>
+                <label for="edit-image-id">Select Image:</label>
+                <select id="edit-image-id" name="edit-image-id">
+                    <option value="">Select Image</option>
+                    <!-- Add dynamic options here -->
+                </select>
+
+                <!-- Add image editing options like crop, rotate, etc. -->
+                <button class="btn" type="button">Edit Image</button>
+            </div>
+
+            <!-- Item Description Editor -->
+            <div class="form-group">
+                <h3>Item Description Editor</h3>
+                <label for="item-description-editor">Edit Description:</label>
+                <textarea id="item-description-editor" name="item-description-editor" placeholder="Edit item description"></textarea>
+            </div>
+
+            <!-- Pricing Editor -->
+            <div class="form-group">
+                <h3>Pricing Editor</h3>
+                <label for="pricing-editor">Edit Price:</label>
+                <input type="text" id="pricing-editor" name="pricing-editor" placeholder="Edit item price">
+            </div>
+
+            <!-- Category Assignment -->
+            <div class="form-group">
+                <h3>Category Assignment</h3>
+                <label for="category-assignment">Assign Category:</label>
+                <select id="category-assignment" name="category-assignment">
+                    <option value="">Select Category</option>
+                    <option value="category1">Category 1</option>
+                    <option value="category2">Category 2</option>
+                    <!-- Add more categories as needed -->
+                </select>
+            </div>
+
+            <!-- Tag Management -->
+            <div class="form-group">
+                <h3>Tag Management</h3>
+                <label for="tag-management">Manage Tags:</label>
+                <input type="text" id="tag-management" name="tag-management" placeholder="Enter or edit tags">
+            </div>
+
+            <!-- Shipping Options -->
+            <div class="form-group">
+                <h3>Shipping Options</h3>
+                <label for="shipping-options">Enter Shipping Options:</label>
+                <input type="text" id="shipping-options" name="shipping-options" placeholder="Enter available shipping methods">
+            </div>
+
+            <!-- Return Policy Setup -->
+            <div class="form-group">
+                <h3>Return Policy Setup</h3>
+                <label for="return-policy">Enter Return Policy:</label>
+                <textarea id="return-policy" name="return-policy" placeholder="Enter return policy details"></textarea>
+            </div>
+
+            <!-- Product Variants -->
+            <div class="form-group">
+                <h3>Product Variants</h3>
+                <label for="product-variants">Enter Product Variants:</label>
+                <input type="text" id="product-variants" name="product-variants" placeholder="Enter product variants">
+            </div>
+
+            <!-- Inventory Management -->
+            <div class="form-group">
+                <h3>Inventory Management</h3>
+                <label for="inventory-management">Manage Inventory:</label>
+                <input type="text" id="inventory-management" name="inventory-management" placeholder="Enter inventory details">
+            </div>
+
+            <!-- Promotional Discounts -->
+            <div class="form-group">
+                <h3>Promotional Discounts</h3>
+                <label for="promotional-discounts">Enter Promotional Discounts:</label>
+                <input type="text" id="promotional-discounts" name="promotional-discounts" placeholder="Enter discount details">
+            </div>
+
+            <!-- Sale Alerts -->
+            <div class="form-group">
+                <h3>Sale Alerts</h3>
+                <label for="sale-alerts">Set Sale Alerts:</label>
+                <input type="text" id="sale-alerts" name="sale-alerts" placeholder="Enter sale alert details">
+            </div>
+        </div>
+
+        <!-- Shopping Cart and Checkout -->
+        <div class="section" id="shopping-cart-checkout">
+            <h2>Shopping Cart and Checkout</h2>
+
+            <!-- Shopping Cart Overview -->
+            <div class="form-group">
+                <h3>Shopping Cart Overview</h3>
+                <p>Items currently in your cart:</p>
+                <div id="cart-items">
+                    <!-- Dynamic cart item list -->
+                </div>
+            </div>
+
+            <!-- Add Items to Cart -->
+            <div class="form-group">
+                <h3>Add Items to Cart</h3>
+                <label for="cart-item-id">Select Item:</label>
+                <select id="cart-item-id" name="cart-item-id">
+                    <option value="">Select Item</option>
+                    <!-- Add dynamic item options here -->
+                </select>
+
+                <label for="cart-item-quantity">Quantity:</label>
+                <input type="number" id="cart-item-quantity" name="cart-item-quantity" min="1">
+
+                <button class="btn" type="submit">Add to Cart</button>
+            </div>
+
+            <!-- Remove Items from Cart -->
+            <div class="form-group">
+                <h3>Remove Items from Cart</h3>
+                <label for="remove-cart-item-id">Select Item to Remove:</label>
+                <select id="remove-cart-item-id" name="remove-cart-item-id">
+                    <option value="">Select Item</option>
+                    <!-- Add dynamic item options here -->
+                </select>
+
+                <button class="btn" type="submit">Remove from Cart</button>
+            </div>
+
+            <!-- Update Item Quantities -->
+            <div class="form-group">
+                <h3>Update Item Quantities</h3>
+                <label for="update-cart-item-id">Select Item:</label>
+                <select id="update-cart-item-id" name="update-cart-item-id">
+                    <option value="">Select Item</option>
+                    <!-- Add dynamic item options here -->
+                </select>
+
+                <label for="update-cart-item-quantity">New Quantity:</label>
+                <input type="number" id="update-cart-item-quantity" name="update-cart-item-quantity" min="1">
+
+                <button class="btn" type="submit">Update Quantity</button>
+            </div>
+
+            <!-- Cart Summary -->
+            <div class="form-group">
+                <h3>Cart Summary</h3>
+                <p>Total Items: <span id="total-items">0</span></p>
+                <p>Total Price: <span id="total-price">$0.00</span></p>
+            </div>
+
+            <!-- Apply Coupons -->
+            <div class="form-group">
+                <h3>Apply Coupons</h3>
+                <label for="coupon-code">Enter Coupon Code:</label>
+                <input type="text" id="coupon-code" name="coupon-code" placeholder="Enter coupon code">
+
+                <button class="btn" type="submit">Apply Coupon</button>
+            </div>
+
+            <!-- Estimated Shipping Costs -->
+            <div class="form-group">
+                <h3>Estimated Shipping Costs</h3>
+                <label for="shipping-address">Enter Shipping Address:</label>
+                <input type="text" id="shipping-address" name="shipping-address" placeholder="Enter your shipping address">
+
+                <button class="btn" type="submit">Calculate Shipping</button>
+            </div>
+
+            <!-- Select Shipping Method -->
+            <div class="form-group">
+                <h3>Select Shipping Method</h3>
+                <select id="shipping-method" name="shipping-method">
+                    <option value="standard">Standard Shipping</option>
+                    <option value="express">Express Shipping</option>
+                    <!-- Add more shipping options here -->
+                </select>
+            </div>
+
+            <!-- Enter Shipping Address -->
+            <div class="form-group">
+                <h3>Enter Shipping Address</h3>
+                <label for="shipping-address">Address:</label>
+                <input type="text" id="shipping-address" name="shipping-address" placeholder="Enter your address">
+
+                <label for="shipping-city">City:</label>
+                <input type="text" id="shipping-city" name="shipping-city" placeholder="Enter your city">
+
+                <label for="shipping-zip">Zip Code:</label>
+                <input type="text" id="shipping-zip" name="shipping-zip" placeholder="Enter your zip code">
+
+                <label for="shipping-country">Country:</label>
+                <input type="text" id="shipping-country" name="shipping-country" placeholder="Enter your country">
+            </div>
+
+            <!-- Payment Method Selection -->
+            <div class="form-group">
+                <h3>Payment Method Selection</h3>
+                <select id="payment-method" name="payment-method">
+                    <option value="credit-card">Credit Card</option>
+                    <option value="paypal">PayPal</option>
+                    <option value="bank-transfer">Bank Transfer</option>
+                    <option value="crypto">Cryptocurrency</option>
+                    <!-- Add more payment options here -->
+                </select>
+            </div>
+
+            <!-- Enter Payment Details -->
+            <div class="form-group">
+                <h3>Enter Payment Details</h3>
+                <label for="payment-details">Payment Information:</label>
+                <input type="text" id="payment-details" name="payment-details" placeholder="Enter payment details">
+
+                <button class="btn" type="submit">Submit Payment</button>
+            </div>
+
+            <!-- Review Order -->
+            <div class="form-group">
+                <h3>Review Order</h3>
+                <p>Review your order before confirming:</p>
+                <div id="order-summary">
+                    <!-- Dynamic order summary details -->
+                </div>
+
+                <button class="btn" type="submit">Confirm Purchase</button>
+            </div>
+
+            <!-- Order Confirmation Page -->
+            <div class="form-group">
+                <h3>Order Confirmation</h3>
+                <p>Thank you for your purchase! Your order number is: <span id="order-number">123456</span></p>
+                <p>You will receive a confirmation email shortly.</p>
+            </div>
+
+            <!-- Order Tracking -->
+            <div class="form-group">
+                <h3>Order Tracking</h3>
+                <label for="order-tracking-number">Enter Order Number:</label>
+                <input type="text" id="order-tracking-number" name="order-tracking-number" placeholder="Enter your order number">
+
+                <button class="btn" type="submit">Track Order</button>
+            </div>
+
+            <!-- Order History -->
+            <div class="form-group">
+                <h3>Order History</h3>
+                <div id="order-history">
+                    <!-- Dynamic order history list -->
+                </div>
+            </div>
+
+            <!-- Save Shipping Information -->
+            <div class="form-group">
+                <h3>Save Shipping Information</h3>
+                <label for="save-shipping-info">Save Address for Future Orders:</label>
+                <input type="checkbox" id="save-shipping-info" name="save-shipping-info">
+
+                <button class="btn" type="submit">Save Address</button>
+            </div>
+
+            <!-- Order Cancellation -->
+            <div class="form-group">
+                <h3>Order Cancellation</h3>
+                <label for="cancel-order-number">Enter Order Number:</label>
+                <input type="text" id="cancel-order-number" name="cancel-order-number" placeholder="Enter order number to cancel">
+
+                <button class="btn" type="submit">Cancel Order</button>
+            </div>
+
+            <!-- Order Returns and Refunds -->
+            <div class="form-group">
+                <h3>Order Returns and Refunds</h3>
+                <label for="return-order-number">Enter Order Number:</label>
+                <input type="text" id="return-order-number" name="return-order-number" placeholder="Enter order number to return">
+
+                <label for="return-reason">Reason for Return:</label>
+                <textarea id="return-reason" name="return-reason" placeholder="Enter reason for return"></textarea>
+
+                <button class="btn" type="submit">Submit Return Request</button>
+            </div>
+
+            <!-- Gift Cards -->
+            <div class="form-group">
+                <h3>Gift Cards</h3>
+                <label for="gift-card-code">Enter Gift Card Code:</label>
+                <input type="text" id="gift-card-code" name="gift-card-code" placeholder="Enter gift card code">
+
+                <button class="btn" type="submit">Apply Gift Card</button>
+            </div>
+        </div>
+
+        <!-- Payment Processing -->
+        <div class="section" id="payment-processing">
+            <h2>Payment Processing</h2>
+
+            <!-- Credit Card Payments -->
+            <div class="form-group">
+                <h3>Credit Card Payments</h3>
+                <p>Enter your credit card information to make a payment.</p>
+                <!-- Add form fields for credit card payment -->
+            </div>
+
+            <!-- PayPal Integration -->
+            <div class="form-group">
+                <h3>PayPal Integration</h3>
+                <p>Pay with PayPal using the button below.</p>
+                <!-- Add PayPal button integration -->
+            </div>
+
+            <!-- Bank Transfer Options -->
+            <div class="form-group">
+                <h3>Bank Transfer Options</h3>
+                <p>Information for bank transfers:</p>
+                <!-- Add bank transfer information -->
+            </div>
+
+            <!-- Cryptocurrency Payments -->
+            <div class="form-group">
+                <h3>Cryptocurrency Payments</h3>
+                <p>Pay using cryptocurrency:</p>
+                <!-- Add cryptocurrency payment options -->
+            </div>
+
+            <!-- Secure Payment Gateway -->
+            <div class="form-group">
+                <h3>Secure Payment Gateway</h3>
+                <p>All transactions are secured with encryption.</p>
+                <!-- Add secure payment gateway details -->
+            </div>
+
+            <!-- Payment Confirmation Emails -->
+            <div class="form-group">
+                <h3>Payment Confirmation Emails</h3>
+                <p>Confirmation emails will be sent upon successful payment.</p>
+                <!-- Add email confirmation details -->
+            </div>
+
+            <!-- Invoice Generation -->
+            <div class="form-group">
+                <h3>Invoice Generation</h3>
+                <p>Invoices will be generated for completed transactions.</p>
+                <!-- Add invoice generation details -->
+            </div>
+
+            <!-- Recurring Payments -->
+            <div class="form-group">
+                <h3>Recurring Payments</h3>
+                <p>Manage recurring payment options.</p>
+                <!-- Add recurring payment options -->
+            </div>
+
+            <!-- Payment History -->
+            <div class="form-group">
+                <h3>Payment History</h3>
+                <p>View your payment history here.</p>
+                <!-- Add payment history details -->
+            </div>
+
+            <!-- Refund Processing -->
+            <div class="form-group">
+                <h3>Refund Processing</h3>
+                <p>Manage refund requests and process refunds.</p>
+                <!-- Add refund processing options -->
+            </div>
+
+            <!-- Chargeback Management -->
+            <div class="form-group">
+                <h3>Chargeback Management</h3>
+                <p>Handle chargebacks and disputes.</p>
+                <!-- Add chargeback management details -->
+            </div>
+
+            <!-- Transaction Security -->
+            <div class="form-group">
+                <h3>Transaction Security</h3>
+                <p>All transactions are secured with industry-standard protocols.</p>
+                <!-- Add transaction security details -->
+            </div>
+
+            <!-- PCI Compliance -->
+            <div class="form-group">
+                <h3>PCI Compliance</h3>
+                <p>Our payment systems comply with PCI DSS standards.</p>
+                <!-- Add PCI compliance details -->
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        document.getElementById('listing-images').addEventListener('change', function(event) {
+            const files = event.target.files;
+            const previewContainer = document.getElementById('image-preview-container');
+            previewContainer.innerHTML = '';
+            Array.from(files).forEach(file => {
+                const img = document.createElement('img');
+                img.src = URL.createObjectURL(file);
+                img.className = 'image-preview';
+                previewContainer.appendChild(img);
+            });
+        });
+
+        document.getElementById('upload-images').addEventListener('change', function(event) {
+            const files = event.target.files;
+            const previewContainer = document.getElementById('upload-image-preview-container');
+            previewContainer.innerHTML = '';
+            Array.from(files).forEach(file => {
+                const img = document.createElement('img');
+                img.src = URL.createObjectURL(file);
+                img.className = 'image-preview';
+                previewContainer.appendChild(img);
+            });
+        });
+    </script>
+
+</body>
+</html>
